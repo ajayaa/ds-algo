@@ -1,6 +1,9 @@
 package bst
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/ajayaa/ds-algo/stack"
+)
 
 type Node struct {
 	value int
@@ -77,4 +80,31 @@ func (n *Node) PostOrder() {
 	n.left.PostOrder()
 	n.right.PostOrder()
 	fmt.Println(n.value)
+}
+
+func (tree *BST) IterativeInOrder() {
+	if tree.root == nil {
+		return
+	}
+	stack := stack.Stack{}
+
+	push_all_left := func(n *Node) {
+		for {
+			if n == nil {
+				break
+			}
+			stack.Push(n)
+			n = n.left
+		}
+	}
+	temp := tree.root
+	push_all_left(temp)
+	for !stack.IsEmpty() {
+		popped := stack.Pop().(*Node)
+		fmt.Println(popped.value)
+		if popped.right != nil {
+			temp = popped.right
+			push_all_left(temp)
+		}
+	}
 }
