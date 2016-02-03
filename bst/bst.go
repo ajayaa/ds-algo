@@ -44,6 +44,14 @@ func (tree *BST) InOrder() {
 	tree.root.InOrder()
 }
 
+func (tree *BST) PreOrder() {
+	tree.root.PreOrder()
+}
+
+func (tree *BST) PostOrder() {
+	tree.root.PostOrder()
+}
+
 func (n *Node) InOrder() {
 	if n == nil {
 		return
@@ -51,4 +59,22 @@ func (n *Node) InOrder() {
 	n.left.InOrder()
 	fmt.Println(n.value)
 	n.right.InOrder()
+}
+
+func (n *Node) PreOrder() {
+	if n == nil {
+		return
+	}
+	fmt.Println(n.value)
+	n.left.PreOrder()
+	n.right.PreOrder()
+}
+
+func (n *Node) PostOrder() {
+	if n == nil {
+		return
+	}
+	n.left.PostOrder()
+	n.right.PostOrder()
+	fmt.Println(n.value)
 }
